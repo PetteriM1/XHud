@@ -1,0 +1,13 @@
+# Variables:
+# <NAME> Player's name
+# <WORLD> World name
+# <X> X coordinate
+# <Y> Y Coordinate
+# <Z> Z coordinate
+# <N> Switches to next line
+# <PLAYERS> Number of players online
+# <MAXPLAYERS> Max amount of players
+# <PING> Player's ping
+# <MONEY> Money amount from EconomyAPI
+
+Message: XHud 2.0
