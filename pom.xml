@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>hud</groupId>
     <artifactId>XHud</artifactId>
-    <version>2.0</version>
+    <version>3.0</version>
 
     <build>
         <defaultGoal>install</defaultGoal>
@@ -59,6 +59,14 @@
              <scope>system</scope>
              <systemPath>${basedir}/lib/EconomyAPI.jar</systemPath>
          </dependency>
+		 <dependency>
+			 <groupId>com.massivecraft.factions</groupId>
+			 <artifactId>Factions</artifactId>
+			 <version>0</version>
+			 <optional>false</optional>
+			 <scope>system</scope>
+			 <systemPath>${basedir}/lib/Factions.jar</systemPath>
+		 </dependency>
      </dependencies>
      <properties>
          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,4 +1,4 @@
-# Variables:
+# Available Variables:
 # <NAME> Player's name
 # <WORLD> World name
 # <X> X coordinate
@@ -8,6 +8,8 @@
 # <PLAYERS> Number of players online
 # <MAXPLAYERS> Max amount of players
 # <PING> Player's ping
+# <TPS> Server TPS
+# <FNAME> Faction name
 # <MONEY> Money amount from EconomyAPI
 
-Message: XHud 2.0
+Message: "XHud 3.0<N>Created by PetteriM1<N>You can edit hud in config.yml"
