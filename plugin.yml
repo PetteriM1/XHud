@@ -1,5 +1,5 @@
 name: XHud
 main: xhud.Main
-version: "2.0"
+version: "${pom.version}"
 author: PetteriM1
 api: ["1.0.0"]
