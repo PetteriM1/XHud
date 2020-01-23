@@ -1,6 +1,6 @@
 package xhud;
 
-import cn.nukkit.Player;
+import cn.nukkit.player.Player;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 
@@ -15,12 +15,13 @@ public class Main extends PluginBase {
 	}
 
 	public static String getFName(Player player) {
-		try {
+		/*try {
 			Class.forName("com.massivecraft.factions.P");
 			return com.massivecraft.factions.P.p.getPlayerFactionTag(player);
 		} catch (Exception e) {
 			return "null";
-		}
+		}*/
+		return "Factions support with Nukkit 2.0 unavailable in this version"; //TODO
 	}
 }
 
@@ -48,12 +49,13 @@ class Hud extends Thread {
 					.replaceAll("<PING>", Integer.toString(player.getPing()))
 					.replaceAll("<TPS>", Float.toString(plugin.getServer().getTicksPerSecond()));
 
-			try {
+			/*try {
 				Class.forName("me.onebone.economyapi.EconomyAPI");
 				money = Double.toString(me.onebone.economyapi.EconomyAPI.getInstance().myMoney(player));
 			} catch (Exception e) {
 				money = "null";
-			}
+			}*/
+			money = "EconomyAPI support with Nukkit 2.0 unavailable in this version"; //TODO
 
 			player.sendPopup(hud.replaceAll("<MONEY>", money).replaceAll("<FNAME>", Main.getFName(player)));
 		}
