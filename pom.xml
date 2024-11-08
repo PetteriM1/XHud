@@ -5,12 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>hud</groupId>
     <artifactId>XHud</artifactId>
-    <version>3.0</version>
-
+    <version>4.0</version>
+    <repositories>
+        <repository>
+            <id>nukkitx</id>
+            <url>https://repo.opencollab.dev/main/</url>
+        </repository>
+    </repositories>
     <build>
-        <defaultGoal>install</defaultGoal>
         <sourceDirectory>${basedir}</sourceDirectory>
-        
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -41,15 +44,12 @@
             </resource>
         </resources>
     </build>
-
      <dependencies>
          <dependency>
              <groupId>cn.nukkit</groupId>
-             <artifactId>Nukkit</artifactId>
-             <version>SuomiCraftPE</version>
-             <optional>false</optional>
-             <scope>system</scope>
-             <systemPath>${basedir}/lib/Nukkit-SuomiCraftPE.jar</systemPath>
+             <artifactId>nukkit</artifactId>
+             <version>1.0-SNAPSHOT</version>
+             <scope>provided</scope>
          </dependency>
          <dependency>
              <groupId>me.onebone.economyapi</groupId>

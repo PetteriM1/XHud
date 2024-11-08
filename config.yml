@@ -12,4 +12,6 @@
 # <FNAME> Faction name
 # <MONEY> Money amount from EconomyAPI
 
-Message: "XHud 3.0<N>Created by PetteriM1<N>You can edit hud in config.yml"
+Message: "XHud 3.0<N>Created by PetteriM1<N>You can edit hud in config.yml<N><N><N>"
+
+UpdateIntervalTicks: 10

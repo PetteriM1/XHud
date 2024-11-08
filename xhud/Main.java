@@ -2,16 +2,42 @@ package xhud;
 
 import cn.nukkit.Player;
 import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.utils.Config;
+
+import java.util.Map;
+import java.util.UUID;
 
 public class Main extends PluginBase {
 
-	public static Config config;
-
 	public void onEnable() {
 		saveDefaultConfig();
-		config = getConfig();
-		getServer().getScheduler().scheduleDelayedRepeatingTask(new Hud(this), 10, 10);
+		String message = getConfig().getString("Message");
+		int updateIntervalTicks = Math.max(getConfig().getInt("UpdateIntervalTicks", 10), 1);
+		getServer().getScheduler().scheduleDelayedRepeatingTask(this, () -> {
+			Map<UUID, Player> players = getServer().getOnlinePlayers();
+			for (Player player : players.values()) {
+				String money;
+				String hud = message
+						.replace("<NAME>", player.getName())
+						.replace("<WORLD>", player.getLevel().getName())
+						.replace("<X>", Integer.toString((int) player.x))
+						.replace("<Y>", Integer.toString((int) player.y))
+						.replace("<Z>", Integer.toString((int) player.z))
+						.replace("<N>", "\n")
+						.replace("<PLAYERS>", Integer.toString(players.size()))
+						.replace("<MAXPLAYERS>", Integer.toString(getServer().getMaxPlayers()))
+						.replace("<PING>", Integer.toString(player.getPing()))
+						.replace("<TPS>", Float.toString(getServer().getTicksPerSecond()));
+
+				try {
+					Class.forName("me.onebone.economyapi.EconomyAPI");
+					money = Double.toString(me.onebone.economyapi.EconomyAPI.getInstance().myMoney(player));
+				} catch (Exception e) {
+					money = "null";
+				}
+
+				player.sendTip(hud.replace("<MONEY>", money).replace("<FNAME>", Main.getFName(player)));
+			}
+		}, updateIntervalTicks, updateIntervalTicks);
 	}
 
 	public static String getFName(Player player) {
@@ -24,38 +50,3 @@ public class Main extends PluginBase {
 	}
 }
 
-class Hud extends Thread {
-
-	private Main plugin;
-
-	public Hud(Main plugin) {
-		this.plugin = plugin;
-	}
-
-	@Override
-	public void run() {
-		for (Player player : plugin.getServer().getOnlinePlayers().values()) {
-			String money;
-			String hud = Main.config.getString("Message")
-					.replaceAll("<NAME>", player.getName())
-					.replaceAll("<WORLD>", player.getLevel().getName())
-					.replaceAll("<X>", Integer.toString((int) player.x))
-					.replaceAll("<Y>", Integer.toString((int) player.y))
-					.replaceAll("<Z>", Integer.toString((int) player.z))
-					.replaceAll("<N>", "\n")
-					.replaceAll("<PLAYERS>", Integer.toString(plugin.getServer().getOnlinePlayers().size()))
-					.replaceAll("<MAXPLAYERS>", Integer.toString(plugin.getServer().getMaxPlayers()))
-					.replaceAll("<PING>", Integer.toString(player.getPing()))
-					.replaceAll("<TPS>", Float.toString(plugin.getServer().getTicksPerSecond()));
-
-			try {
-				Class.forName("me.onebone.economyapi.EconomyAPI");
-				money = Double.toString(me.onebone.economyapi.EconomyAPI.getInstance().myMoney(player));
-			} catch (Exception e) {
-				money = "null";
-			}
-
-			player.sendPopup(hud.replaceAll("<MONEY>", money).replaceAll("<FNAME>", Main.getFName(player)));
-		}
-	}
-}
